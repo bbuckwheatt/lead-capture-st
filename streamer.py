@@ -108,7 +108,6 @@ if "init" not in st.session_state:
     st.session_state.init = True
     st.session_state.session_id = str(uuid.uuid4())
     st.session_state.messages = [{"role": "assistant", "content": "How may I assist you today?"}]
-    st.session_state.mandatory = False
     st.session_state.append_after = 3  # Set the threshold to 3
     st.session_state.custom_message = ""
     st.session_state.append_enabled = False
@@ -141,10 +140,9 @@ with st.sidebar:
         
         if st.session_state.append_enabled:
             st.session_state.custom_message = st.text_input("Custom message to append:", value=st.session_state.custom_message)
-            st.session_state.mandatory = st.checkbox("Make user info mandatory", value=st.session_state.mandatory)
+            st.session_state.disable_chat = st.checkbox("Disable chat after appending message", value=st.session_state.disable_chat)
             st.session_state.append_after = st.number_input("Append after how many messages?", min_value=0, value=st.session_state.append_after)
-            if st.session_state.mandatory:
-                st.session_state.disable_chat = st.checkbox("Disable chat after appending message", value=st.session_state.disable_chat)
+                
 
 # Display or clear chat messages
 for index, message in enumerate(st.session_state.messages):
