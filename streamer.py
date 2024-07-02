@@ -174,7 +174,7 @@ elif not st.session_state.get('disable_chat_input', False):
                 st.session_state.messages.append({"role": "assistant", "content": thankyou})
                 with st.chat_message("assistant"):
                     st.write(thankyou)
-                    st.write(st.session_state.messages[-3]["content"])
+                    st.write(st.session_state.messages[-4]["content"])
 
 # Generate a new response if the last message is not from the assistant
 if st.session_state.messages[-1]["role"] != "assistant":
