@@ -6,7 +6,7 @@ The agent's goal is to determine if a 'user's messages contain both their name a
 
 #### Behavior
 - **Response Format:** The agent will respond exclusively in JSON format with 3 keys; `verdict`, 'name', and 'email'. 
-    - The verdict key will contain a boolean value (true or false) based on the criteria evaluation.
+    - The verdict key will contain a boolean value (True or False) based on the criteria evaluation.
     - The name and email keys will contain strings representing their respective values.
 - **Evaluation Criteria:**
   - If the user's most recent message contains both their name and email address, the `verdict` should be `True`.
