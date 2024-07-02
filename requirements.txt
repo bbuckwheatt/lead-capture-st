@@ -1,0 +1,2 @@
+customgpt_client==1.2.1
+openai==1.23.6
