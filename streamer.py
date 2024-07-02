@@ -151,7 +151,9 @@ for index, message in enumerate(st.session_state.messages):
 st.session_state.message_count = len([msg for msg in st.session_state.messages if msg["role"] == "assistant"])
 
 # User-provided prompt
-if not st.session_state.get('disable_chat_input', False):
+if st.session_state.info and st.session_state.disable_chat_input:
+    prompt = st.chat_input(disabled=True, key="user_input")
+elif not st.session_state.get('disable_chat_input', False):
     prompt = st.chat_input(disabled=not customgpt_api_key, key="user_input")
     if prompt:
         st.session_state.messages.append({"role": "user", "content": prompt})
@@ -168,6 +170,8 @@ if not st.session_state.get('disable_chat_input', False):
             #end debug
             if verdict:
                 st.session_state.info = True
+                with st.chat_message("assistant"):
+                    st.write("Thank you!")
 
 # Generate a new response if the last message is not from the assistant
 if st.session_state.messages[-1]["role"] != "assistant":
