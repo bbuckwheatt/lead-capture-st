@@ -71,7 +71,14 @@ with st.sidebar:
     st.title('Lead Capture Settings')
     st.button('Reset Chat', on_click=reset_app)
     lead_capture_enabled = st.checkbox("Enable Lead Capture", value=True)
+    start_with_lead_capture = st.checkbox("Start with Lead Capture", value=False)
     messages_before_capture = st.number_input("Messages before lead capture", min_value=1, value=3)
+
+# Set initial agent based on the toggle
+if start_with_lead_capture and lead_capture_enabled and not st.session_state.lead_captured:
+    st.session_state.current_agent = 'lead_capture'
+else:
+    st.session_state.current_agent = 'general'
 
 # Main chat interface
 st.title("Lead Capture Chat")
@@ -83,7 +90,7 @@ for message in st.session_state.messages:
 
 # Display welcome message if it's a new session
 if not st.session_state.messages:
-    welcome_message = "How may I assist you today?"
+    welcome_message = "How may I assist you today?" if st.session_state.current_agent == 'general' else "Before we begin, could you please provide your name?"
     st.chat_message("assistant").write(welcome_message)
     st.session_state.messages.append({"role": "assistant", "content": welcome_message})
 
