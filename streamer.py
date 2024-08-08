@@ -115,7 +115,9 @@ if user_input:
             }
             st.session_state.lead_captured = True
             st.session_state.current_agent = 'general'
-            st.success(f"Lead captured: {st.session_state.lead_info['name']} ({st.session_state.lead_info['email']})")
+            success_message = f"Lead captured: {st.session_state.lead_info['name']} ({st.session_state.lead_info['email']})"
+            st.success(success_message)
+            response += f"\n\n{success_message}\n\nHow else can I assist you today?"
     
     st.session_state.messages.append({"role": "assistant", "content": response})
     st.chat_message("assistant").write(response)
